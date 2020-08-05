@@ -1,3 +1,7 @@
 from django.contrib import admin
+from webapp.models import Goal, Status, Type
 
-# Register your models here.
+admin.site.register(Goal)
+admin.site.register(Status)
+admin.site.register(Type)
+
