@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Main{% endblock %}
+
+{% block content %}
+    <h1>Goals</h1>
+    {% for goal in goals %}
+        <h2><a href="{% url 'goal_view' goal.pk%}">{{ goal.summary }}</a></h2>
+        <p>Cтатус: {{ goal.status }} </p>
+        <p>Тип: {{ goal.type }}</p>
+    {% endfor %}
+{% endblock %}
