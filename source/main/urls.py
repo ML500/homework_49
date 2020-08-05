@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from webapp.views import IndexView, GoalView
+from webapp.views import IndexView, GoalView, GoalCreateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='index'),
     path('goal/<int:pk>/', GoalView.as_view(), name='goal_view'),
+    path('goal/add/', GoalCreateView.as_view(), name='goal_create')
 
 ]

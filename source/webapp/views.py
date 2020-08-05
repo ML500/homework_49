@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseNotAllowed
 from django.views.generic import View, TemplateView
 from webapp.models import Goal, Status, Type
+from webapp.forms import GoalForm
 
 
 class IndexView(TemplateView):
@@ -28,6 +29,7 @@ class GoalView(TemplateView):
         context['goal'] = goal
         return context
 
+
 class GoalCreateView(View):
     def get(self, request):
         return render(request, 'goal_create.html', context={
@@ -47,4 +49,3 @@ class GoalCreateView(View):
             return render(request, 'goal_create.html', context={
                 'form': form
             })
-
