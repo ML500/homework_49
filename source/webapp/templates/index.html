@@ -8,5 +8,7 @@
         <h2><a href="{% url 'goal_view' goal.pk%}">{{ goal.summary }}</a></h2>
         <p>Cтатус: {{ goal.status }} </p>
         <p>Тип: {{ goal.type }}</p>
+        <p><a href="{% url 'goal_update' goal.pk %}">Update</a></p>
+        <p><a href="{% url 'goal_delete' goal.pk %}">Delete</a></p>
     {% endfor %}
 {% endblock %}
