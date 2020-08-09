@@ -1,12 +1,11 @@
 from django.contrib import admin
-from webapp.models import Goal, Status, Type, GoalType
+from webapp.models import Goal, Status, Type
 
 
 class GoalAdmin(admin.ModelAdmin):
-    pass
+    filter_horizontal = ('type',)
 
 
 admin.site.register(Goal, GoalAdmin)
 admin.site.register(Status)
 admin.site.register(Type)
-admin.site.register(GoalType)
