@@ -11,7 +11,7 @@
     <h1>{{ goal.summary }}</h1>
     <p>Описание: {{ goal.description }}</p>
     <p>Cтатус: {{ goal.status }} </p>
-    <p>Тип: {{ goal.type }}</p>
+    <p>Типы: {% for type in goal.type.all %}{{type.name}}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
     <p>Создано: {{ goal.created_at }}</p>
 {% endblock %}
 

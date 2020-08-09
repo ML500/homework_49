@@ -7,7 +7,7 @@
     {% for goal in goals %}
         <h2><a href="{% url 'goal_view' goal.pk%}">{{ goal.summary }}</a></h2>
         <p>Cтатус: {{ goal.status }} </p>
-        <p>Тип: {{ goal.type }}</p>
+        <p>Типы: {% for type in goal.type.all %}{{type.name}}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
         <p><a href="{% url 'goal_update' goal.pk %}">Update</a></p>
         <p><a href="{% url 'goal_delete' goal.pk %}">Delete</a></p>
     {% endfor %}
