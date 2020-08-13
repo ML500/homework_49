@@ -16,7 +16,7 @@ class GoalForm(forms.ModelForm):
 
         if not summary[0].isdigit():
             if ord(summary[0]) < 65 or ord(summary[0]) > 90:
-                raise ValidationError('First letter no capital!')
+                raise ValidationError('First letter not capital!')
         return summary
 
 
