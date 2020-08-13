@@ -1,12 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from django.http import HttpResponseNotAllowed
 from django.views.generic import View, TemplateView, FormView
 from django.utils.timezone import make_naive
 
 from webapp.models import Goal, Status, Type
 from webapp.forms import GoalForm
-from .base_views import FormView as CustomFormView
 
 
 class IndexView(TemplateView):

@@ -1,8 +1,10 @@
 from django.db import models
+from django.core.validators import MaxLengthValidator
 
 
 class Goal(models.Model):
-    summary = models.CharField(max_length=200, verbose_name='Заголовок')
+    summary = models.CharField(max_length=200, verbose_name='Заголовок',
+                               validators=[MaxLengthValidator(20)])
     description = models.TextField(max_length=3000, null=True, blank=True, verbose_name='Описание')
     status = models.ForeignKey('webapp.Status', related_name='statuses',
                                on_delete=models.PROTECT, verbose_name='Статус', default=1)
@@ -37,4 +39,3 @@ class Type(models.Model):
     class Meta:
         verbose_name = 'Тип'
         verbose_name_plural = 'Типы'
-
