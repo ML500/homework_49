@@ -34,23 +34,6 @@ class GoalView(TemplateView):
         return context
 
 
-# class GoalCreateView(CustomFormView):
-#     template_name = 'goal_create.html'
-#     form_class = GoalForm
-#
-#     def form_valid(self, form):
-#         data = {}
-#         type = form.cleaned_data.pop('type')
-#         for key, value in form.cleaned_data.items():
-#             if value is not None:
-#                 data[key] = value
-#         self.goal = Goal.objects.create(**data)
-#         self.goal.type.set(type)
-#         return super().form_valid(form)
-#
-#     def get_redirect_url(self):
-#         return reverse('goal_view', kwargs={'pk': self.goal.pk})
-
 class GoalCreateView(FormView):
     template_name = 'goal_create.html'
     form_class = GoalForm
@@ -61,7 +44,7 @@ class GoalCreateView(FormView):
         for key, value in form.cleaned_data.items():
             if value is not None:
                 data[key] = value
-        self.goal= Goal.objects.create(**data)
+        self.goal = Goal.objects.create(**data)
         self.goal.type.set(type)
         return super().form_valid(form)
 

@@ -5,7 +5,7 @@ class Goal(models.Model):
     summary = models.CharField(max_length=200, verbose_name='Заголовок')
     description = models.TextField(max_length=3000, null=True, blank=True, verbose_name='Описание')
     status = models.ForeignKey('webapp.Status', related_name='statuses',
-                               on_delete=models.PROTECT, verbose_name='Статус')
+                               on_delete=models.PROTECT, verbose_name='Статус', default=1)
     type = models.ManyToManyField('webapp.Type', related_name='goals', blank=True, verbose_name='Тип')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
 
