@@ -37,13 +37,7 @@ class GoalCreateView(FormView):
     form_class = GoalForm
 
     def form_valid(self, form):
-        data = {}
-        type = form.cleaned_data.pop('type')
-        for key, value in form.cleaned_data.items():
-            if value is not None:
-                data[key] = value
-        self.goal = Goal.objects.create(**data)
-        self.goal.type.set(type)
+        self.goal = form.save()
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -63,21 +57,13 @@ class GoalUpdateView(FormView):
         context['goal'] = self.get_object()
         return context
 
-    def get_initial(self):
-        initial = {}
-        for key in 'summary', 'description', 'status':
-            initial[key] = getattr(self.goal, key)
-        initial['created_at'] = make_naive(self.goal.created_at).strftime('%Y-%m-%dT%H:%M')
-        initial['type'] = self.goal.type.all()
-        return initial
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['instance'] = self.goal
+        return kwargs
 
     def form_valid(self, form):
-        type = form.cleaned_data.pop('type')
-        for key, value in form.cleaned_data.items():
-            if value is not None:
-                setattr(self.goal, key, value)
-        self.goal.save()
-        self.goal.type.set(type)
+        self.goal = form.save()
         return super().form_valid(form)
 
     def get_success_url(self):

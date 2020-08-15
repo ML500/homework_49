@@ -10,6 +10,7 @@ class Goal(models.Model):
                                on_delete=models.PROTECT, verbose_name='Статус', default=1)
     type = models.ManyToManyField('webapp.Type', related_name='goals', blank=True, verbose_name='Тип')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
 
     def __str__(self):
         return f'{self.summary}, {self.status}'
