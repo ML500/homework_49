@@ -11,23 +11,23 @@ class GoalForm(forms.ModelForm):
         fields = ['summary', 'description', 'status', 'type']
         widgets = {'type': forms.CheckboxSelectMultiple}
 
-    def clean_summary(self):
-        summary = self.cleaned_data['summary']
+    # def clean_summary(self):
+    #     summary = self.cleaned_data['summary']
+    #
+    #     if not summary[0].isdigit():
+    #         if ord(summary[0]) < 65 or ord(summary[0]) > 90:
+    #             raise ValidationError('First letter not capital!')
+    #     return summary
 
-        if not summary[0].isdigit():
-            if ord(summary[0]) < 65 or ord(summary[0]) > 90:
-                raise ValidationError('First letter not capital!')
-        return summary
 
-
-@deconstructible
-class MaxLengthValidator(BaseValidator):
-    message = 'Value "%(value)s" has length of %(show_value)d! ' \
-              'It should be at least %(limit_value)d symbols long!'
-    code = 'too_short'
-
-    def compare(self, value, limit):
-        return value > limit
-
-    def clean(self, value):
-        return len(value)
+# @deconstructible
+# class MaxLengthValidator(BaseValidator):
+#     message = 'Value "%(value)s" has length of %(show_value)d! ' \
+#               'It should be at least %(limit_value)d symbols long!'
+#     code = 'too_short'
+#
+#     def compare(self, value, limit):
+#         return value > limit
+#
+#     def clean(self, value):
+#         return len(value)
