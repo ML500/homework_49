@@ -2,8 +2,20 @@
 
 {% block title %}Main{% endblock %}
 
+{% block search %}
+    <div class="search-form">
+        <form action="{% url 'index' %}" method="GET">
+            {{ form.search }}
+            <input type="submit" value="Найти">
+        </form>
+    </div>
+{% endblock %}
+
 {% block content %}
     <h1>Goals</h1>
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
     {% for goal in goals %}
         <h2><a href="{% url 'goal_view' goal.pk%}">{{ goal.summary }}</a></h2>
         <p>Cтатус: {{ goal.status }} </p>
@@ -11,4 +23,7 @@
         <p><a href="{% url 'goal_update' goal.pk %}">Update</a></p>
         <p><a href="{% url 'goal_delete' goal.pk %}">Delete</a></p>
     {% endfor %}
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
 {% endblock %}

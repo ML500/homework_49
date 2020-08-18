@@ -1,22 +1,37 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from django.views.generic import View, TemplateView, FormView
+from django.views.generic import View, TemplateView, FormView, ListView
+from django.db.models import Q
 from django.utils.timezone import make_naive
 
 from webapp.models import Goal, Status, Type
-from webapp.forms import GoalForm
+from webapp.forms import GoalForm, SimpleSearchForm
 
 
-class IndexView(TemplateView):
+class IndexView(ListView):
     template_name = 'index.html'
+    context_object_name = 'goals'
+    paginate_by = 3
+    paginate_orphans = 0
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_context_data(self, *, object_list=None, **kwargs):
+        form = SimpleSearchForm(data=self.request.GET)
+        if form.is_valid():
+            search = form.cleaned_data['search']
+            kwargs['search'] = search
+        kwargs['form'] = form
+        return super().get_context_data(object_list=object_list, **kwargs)
 
-        goal = Goal.objects.all()
+    def get_queryset(self):
+        data = Goal.objects.all()
 
-        context['goals'] = goal
-        return context
+        form = SimpleSearchForm(data=self.request.GET)
+        if form.is_valid():
+            search = form.cleaned_data['search']
+            if search:
+                data = data.filter(Q(summary__icontains=search) | Q(description__icontains=search))
+
+        return data.order_by('-created_at')
 
 
 class GoalView(TemplateView):

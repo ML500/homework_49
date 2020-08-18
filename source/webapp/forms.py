@@ -11,6 +11,10 @@ class GoalForm(forms.ModelForm):
         fields = ['summary', 'description', 'status', 'type']
         widgets = {'type': forms.CheckboxSelectMultiple}
 
+
+class SimpleSearchForm(forms.Form):
+    search = forms.CharField(max_length=100, required=False, label="Найти")
+
     # def clean_summary(self):
     #     summary = self.cleaned_data['summary']
     #
@@ -18,7 +22,6 @@ class GoalForm(forms.ModelForm):
     #         if ord(summary[0]) < 65 or ord(summary[0]) > 90:
     #             raise ValidationError('First letter not capital!')
     #     return summary
-
 
 # @deconstructible
 # class MaxLengthValidator(BaseValidator):
