@@ -87,3 +87,55 @@ body {
     display: inline-block;
     float: right;
 }
+.pagination {
+    text-align: center;
+}
+
+.pagination a, .pagination .page-disabled {
+    display: inline-block;
+    border: solid 1px #6a7ddd;
+    border-radius: 3px;
+    padding: 5px;
+    margin: 3px;
+}
+
+.pagination a {
+    background: #6a7ddd;
+    color: white;
+    text-decoration: none;
+}
+
+.pagination a:hover {
+    background: #6a7dff;
+    text-decoration: underline;
+}
+
+.pagination .page-disabled {
+    background: #6a7dcc;
+    color: #dddddd
+}
+
+.pagination .current-page {
+    display: inline-block;
+}
+
+.pagination .current-page input {
+    width: 50px;
+    padding: 5px 7px;
+    font-size: inherit;
+    border-radius: 5px;
+    text-align: center;
+    border: solid 1px gray;
+}
+.goal {
+    display: flex;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 20px 0;
+    background-color: lightskyblue;
+}
+.icon-block {
+    font-size: 30px;
+    margin: auto 0 auto auto;
+}
