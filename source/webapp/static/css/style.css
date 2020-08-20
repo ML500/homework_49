@@ -139,3 +139,25 @@ body {
     font-size: 30px;
     margin: auto 0 auto auto;
 }
+.icon {
+    display: inline-block;
+    width: 62px;
+    border: 1px solid black;
+    padding: 7px;
+    font-size: 20px;
+    text-decoration: none;
+    color: white;
+}
+.update {
+    background-color: green;
+}
+.delete {
+    background-color: red;
+}
+.summary {
+    text-decoration: none;
+    color: black;
+}
+.headline {
+    text-align: center;
+}

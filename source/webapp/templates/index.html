@@ -2,11 +2,6 @@
 
 {% block title %}Main{% endblock %}
 
-{% block links %}
-    <script src="https://kit.fontawesome.com/4b023c4009.js"
-            crossorigin="anonymous"></script>
-{% endblock %}
-
 {% block search %}
     <div class="search-form">
         <form action="{% url 'index' %}" method="GET">
@@ -17,20 +12,20 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Goals</h1>
+    <h1 class="headline">Goals</h1>
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
     {% endif %}
     {% for goal in goals %}
         <div class="goal">
             <div class="text-block">
-                <h2><a href="{% url 'goal_view' goal.pk%}">{{ goal.summary }}</a></h2>
+                <h2><a class="summary" href="{% url 'goal_view' goal.pk%}">{{ goal.summary }}</a></h2>
                 <p>Cтатус: {{ goal.status }} </p>
                 <p>Типы: {% for type in goal.type.all %}{{type.name}}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
             </div>
             <div class="icon-block">
-                <p><a href="{% url 'goal_update' goal.pk %}">Update</a></p>
-                <p><a href="{% url 'goal_delete' goal.pk %}">Delete</a></p>
+                <p><a class="icon update" href="{% url 'goal_update' goal.pk %}">Update</a></p>
+                <p><a class="icon delete" href="{% url 'goal_delete' goal.pk %}">Delete</a></p>
             </div>
         </div>
     {% endfor %}
