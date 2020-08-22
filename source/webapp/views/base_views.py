@@ -1,7 +1,5 @@
-from django.db.models import Q
 from django.views.generic import View, ListView
 from django.shortcuts import render, redirect
-from webapp.forms import SimpleSearchForm
 
 
 class FormView(View):
@@ -56,7 +54,7 @@ class SearchView(ListView):
             search = form.cleaned_data['search']
             if search:
                 data = data.filter(self.get_query(search))
-        return data.order_by('-created_at')
+        return data
 
     def get_query(self, search):
         query = None

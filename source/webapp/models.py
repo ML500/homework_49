@@ -3,7 +3,7 @@ from django.core.validators import MaxLengthValidator
 
 
 class Goal(models.Model):
-    project = models.ForeignKey('webapp.Project', related_name='projects',
+    project = models.ForeignKey('webapp.Project', related_name='goals',
                                 on_delete=models.PROTECT, verbose_name='Проект', default=1)
     summary = models.CharField(max_length=200, verbose_name='Заголовок')
     # validators=[MaxLengthValidator(20)])

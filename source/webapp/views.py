@@ -1,15 +1,15 @@
 from django.db.models import Q
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
-from django.views.generic import View, TemplateView, FormView, ListView
+from django.views.generic import TemplateView, FormView
 
 from webapp.models import Goal
 from webapp.forms import GoalForm, SimpleSearchForm
-from webapp.base_views import SearchView
+from webapp.views.base_views import SearchView
 
 
 class IndexView(SearchView):
-    template_name = 'index.html'
+    template_name = 'project/index.html'
     context_object_name = 'goals'
     model = Goal
     paginate_by = 3
@@ -23,7 +23,7 @@ class IndexView(SearchView):
 
 
 class GoalView(TemplateView):
-    template_name = 'goal_view.html'
+    template_name = 'project/project_view.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -36,7 +36,7 @@ class GoalView(TemplateView):
 
 
 class GoalCreateView(FormView):
-    template_name = 'goal_create.html'
+    template_name = 'project/project_create.html'
     form_class = GoalForm
 
     def form_valid(self, form):
@@ -48,7 +48,7 @@ class GoalCreateView(FormView):
 
 
 class GoalUpdateView(FormView):
-    template_name = 'goal_update.html'
+    template_name = 'project/project_update.html'
     form_class = GoalForm
 
     def dispatch(self, request, *args, **kwargs):
@@ -78,7 +78,7 @@ class GoalUpdateView(FormView):
 
 
 class GoalDeleteView(TemplateView):
-    template_name = 'goal_delete.html'
+    template_name = 'project/project_delete.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
