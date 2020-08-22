@@ -3,6 +3,7 @@
   "model": "webapp.goal",
   "pk": 1,
   "fields": {
+    "project": 1,
     "summary": "\u0417\u0430\u043a\u043e\u043d\u0447\u0438\u0442\u044c \u043f\u0440\u043e\u0435\u043a\u0442",
     "description": "TestTestTestTestTestTestTest",
     "status": 2,
@@ -17,6 +18,7 @@
   "model": "webapp.goal",
   "pk": 2,
   "fields": {
+    "project": 1,
     "summary": "\u0414\u043e\u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c\u0441\u044f \u0441 \u043a\u043b\u0438\u0435\u043d\u0442\u043e\u043c",
     "description": "TestTestTestTestTestTestTestTestTestTest",
     "status": 3,
@@ -32,6 +34,7 @@
   "model": "webapp.goal",
   "pk": 3,
   "fields": {
+    "project": 1,
     "summary": "\u0418\u0441\u043f\u0440\u0430\u0432\u0438\u0442\u044c \u043e\u0448\u0438\u0431\u043a\u0443",
     "description": "TestTestTestTestTest\r\nTestTestTestTest",
     "status": 1,
@@ -47,6 +50,7 @@
   "model": "webapp.goal",
   "pk": 4,
   "fields": {
+    "project": 1,
     "summary": "\u0423\u043b\u0443\u0447\u0448\u0438\u0442\u044c \u0441\u0430\u0439\u0442",
     "description": "TestTest",
     "status": 1,
@@ -61,6 +65,7 @@
   "model": "webapp.goal",
   "pk": 5,
   "fields": {
+    "project": 1,
     "summary": "\u0418\u0437\u0443\u0447\u0438\u0442\u044c \u043d\u043e\u0432\u044b\u0439 \u0444\u0440\u0435\u0439\u043c\u0432\u043e\u0440\u043a",
     "description": "",
     "status": 2,
@@ -75,6 +80,7 @@
   "model": "webapp.goal",
   "pk": 6,
   "fields": {
+    "project": 1,
     "summary": "Bug \u0432 \u043f\u0440\u043e\u0435\u043a\u0442\u0435",
     "description": "\u0431\u043b\u0430 \u0431\u043b\u0430 \u0431\u043b\u0430",
     "status": 1,
@@ -89,6 +95,7 @@
   "model": "webapp.goal",
   "pk": 7,
   "fields": {
+    "project": 1,
     "summary": "\u0412\u0435\u0431 \u043f\u0440\u043e\u0435\u043a\u0442",
     "description": "\u0412\u0435\u0431 \u043f\u0440\u043e\u0435\u043a\u0442",
     "status": 1,
@@ -97,6 +104,16 @@
     "type": [
       1
     ]
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 1,
+  "fields": {
+    "start_date": "2020-08-21",
+    "end_date": null,
+    "name": "\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0441\u043e\u0437\u0434\u0430\u043d\u0438\u044e \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442 \u043c\u0430\u0433\u0430\u0437\u0438\u043d\u0430",
+    "description": "\u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435 \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442 \u043c\u0430\u0433\u0430\u0437\u0438\u043d\u0430 \u0434\u043b\u044f \u0433\u043e\u0440\u043e\u0434\u0430 \u0411\u0438\u0448\u043a\u0435\u043a"
   }
 },
 {
@@ -146,7 +163,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$150000$g9HVUwVohkNL$5IlwFS2sKYIeo/T5OKzhxixlaf66Q0bvzaA6FLy7DQ4=",
-    "last_login": "2020-08-05T17:18:22.469Z",
+    "last_login": "2020-08-21T15:58:56.740Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",

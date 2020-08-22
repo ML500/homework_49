@@ -2,7 +2,6 @@ from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic import View, TemplateView, FormView, ListView
-# from django.utils.timezone import make_naive
 
 from webapp.models import Goal
 from webapp.forms import GoalForm, SimpleSearchForm
@@ -15,6 +14,7 @@ class IndexView(SearchView):
     model = Goal
     paginate_by = 3
     paginate_orphans = 0
+    search_form = SimpleSearchForm
 
     def get_query(self, search):
         query = Q(summary__icontains=search) | \
