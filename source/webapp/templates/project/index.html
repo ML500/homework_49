@@ -32,6 +32,7 @@
                         </p>
                     </h2>
                     <p>Описание: {{ project.description }} </p>
+                    <p>Количество задач: {{ project.goals.count }}</p>
                 </div>
                 <div class="icon-block">
                     <p><a class="icon update" href="{% url 'project_update' project.pk %}">Update</a></p>
