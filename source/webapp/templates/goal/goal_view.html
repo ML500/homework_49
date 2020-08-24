@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}View{% endblock %}
+
+{% block menu %}
+    <li><a href="{% url 'goal_update' goal.pk %}">Update</a></li>
+    <li><a href="{% url 'goal_delete' goal.pk %}">Delete</a></li>
+    <li><a href="{% url 'project_view' goal.project.pk %}">Cancel</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="box">
+        <h1>{{ goal.summary }}</h1>
+        <p>Desription: {{ goal.description }}</p>
+        <p>Create at: {{ goal.created_at }}</p>
+        <p>Update at: {{ goal.updated_at|date:"d.m.Y H:i:s" }}</p>
+        <p>Status: {{ goal.status }}</p>
+        <p>Type: {% for type in goal.type.all %}{{type.name}}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+        <hr>
+    </div>
+{% endblock %}

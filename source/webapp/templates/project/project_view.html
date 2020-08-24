@@ -5,7 +5,8 @@
 {% block menu %}
     <li><a href="{% url 'project_update' project.pk %}">Update Project</a></li>
     <li><a href="{% url 'project_delete' project.pk %}">Delete Project</a></li>
-    <li><a href="{% url 'project_goal_add' project.pk %}">Add Goal</a></li>
+    <li><a href="{% url 'goal_add' project.pk %}">Add Goal</a></li>
+    <li><a href="{% url 'index' %}">Cancel</a></li>
 {% endblock %}
 
 {% block content %}
@@ -18,9 +19,14 @@
             {% include 'partial/pagination.html' %}
         {% endif %}
         {% for goal in goals %}
-            <div class="box">
-                <h4>{{ goal.summary }} ({{ goal.created_at }})</h4>
-{#                <div class="pre">{{ comment.text }}</div>#}
+            <div class="box goals">
+                <div class="goal-text">
+                    <li><a href="{% url 'goal_view' goal.pk %}">{{ goal.summary }}</a></li>
+                </div>
+                <div class="goals-but">
+                    <p><a href="{% url 'goal_update' goal.pk %}">Update</a></p>
+                    <p><a href="{% url 'goal_delete' goal.pk %}">Delete</a></p>
+                </div>
             </div>
         {% empty %}
             <p>No goals</p>

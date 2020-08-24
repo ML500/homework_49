@@ -76,17 +76,20 @@ body {
     background: darkred;
 }
 
-.form-error:focus{
+.form-error:focus {
     box-shadow: 0 0 5px rgba(255, 200, 200)
 }
+
 .red {
     color: red;
     font-weight: bold;
 }
+
 .search-form {
     display: inline-block;
     float: right;
 }
+
 .pagination {
     text-align: center;
 }
@@ -127,6 +130,23 @@ body {
     text-align: center;
     border: solid 1px gray;
 }
+
+.goals {
+    display: flex;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px 30px;
+}
+
+.goals-but {
+    margin: auto 0 auto auto;
+}
+
+.goal-text {
+    margin: auto auto auto 0;
+}
+
 .goal {
     display: flex;
     border: 2px solid black;
@@ -135,10 +155,16 @@ body {
     margin: 20px 0;
     background-color: lightskyblue;
 }
+
+/*.text-block h2:before{*/
+/*    counter-increment: heading;*/
+/*    content: "№ " counter(heading)*/
+/*}*/
 .icon-block {
     font-size: 30px;
     margin: auto 0 auto auto;
 }
+
 .icon {
     display: inline-block;
     width: 62px;
@@ -148,16 +174,28 @@ body {
     text-decoration: none;
     color: white;
 }
+
 .update {
     background-color: green;
 }
+
 .delete {
     background-color: red;
 }
+
 .summary {
     text-decoration: none;
     color: black;
 }
+
 .headline {
     text-align: center;
+}
+
+.mass-actions {
+    text-align: right;
+}
+
+input[type='submit']:hover {
+    cursor: pointer;
 }

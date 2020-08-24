@@ -23,6 +23,14 @@ class IndexView(SearchView):
         return query
 
 
+def project_mass_action_view(request):
+    if request.method == 'POST':
+        ids = request.POST.getlist('selected_projects', [])
+        if 'delete' in request.POST:
+            Project.objects.filter(id__in=ids).delete()
+    return redirect('index')
+
+
 class ProjectView(DetailView):
     template_name = 'project/project_view.html'
     model = Project
