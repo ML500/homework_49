@@ -25,6 +25,7 @@ class GoalCreateView(CreateView):
         goal = form.save(commit=False)
         goal.project = project
         goal.save()
+        form.save_m2m()
         return redirect('project_view', pk=project.pk)
 
 
