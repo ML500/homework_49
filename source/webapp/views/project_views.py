@@ -1,8 +1,8 @@
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.shortcuts import redirect, get_object_or_404
-from django.urls import reverse
-from django.views.generic import TemplateView, FormView, DetailView, CreateView
+from django.shortcuts import redirect
+from django.urls import reverse, reverse_lazy
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 
 from webapp.models import Project
 from webapp.forms import SimpleSearchForm, ProjectForm
@@ -68,51 +68,21 @@ class ProjectCreateView(CreateView):
         return reverse('project_view', kwargs={'pk': self.object.pk})
 
 
-class ProjectUpdateView(FormView):
+class ProjectUpdateView(UpdateView):
     template_name = 'project/project_update.html'
     form_class = ProjectForm
-
-    def dispatch(self, request, *args, **kwargs):
-        self.project = self.get_object()
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['project'] = self.get_object()
-        return context
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['instance'] = self.project
-        return kwargs
-
-    def form_valid(self, form):
-        self.project = form.save()
-        return super().form_valid(form)
+    model = Project
 
     def get_success_url(self):
-        return reverse('project_view', kwargs={'pk': self.project.pk})
-
-    def get_object(self):
-        pk = self.kwargs.get('pk')
-        return get_object_or_404(Project, pk=pk)
+        return reverse('project_view', kwargs={'pk': self.object.pk})
 
 
-class ProjectDeleteView(TemplateView):
+class ProjectDeleteView(DeleteView):
     template_name = 'project/project_delete.html'
+    model = Project
+    success_url = reverse_lazy('index')
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        pk = self.kwargs.get('pk')
-        project = get_object_or_404(Project, pk=pk)
-
-        context['project'] = project
-        return context
-
-    def post(self, request, *args, **kwargs):
-        pk = self.kwargs.get('pk')
-        project = get_object_or_404(Project, pk=pk)
-        project.delete()
-
-        return redirect('index')
+    def soft_delete(self):
+        self.is_deleted = True
+        self.deleted_at = timezone.now()
+        self.save()

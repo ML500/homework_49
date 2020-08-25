@@ -28,6 +28,7 @@ class Project(models.Model):
     end_date = models.DateField(null=True, blank=True, verbose_name='Дата окончания')
     name = models.CharField(max_length=200, verbose_name='Название')
     description = models.TextField(max_length=3000, verbose_name='Описание')
+    is_deleted = models.BooleanField(default=False, verbose_name='Мягкое удаление')
 
     def __str__(self):
         return self.name
@@ -35,6 +36,10 @@ class Project(models.Model):
     class Meta:
         verbose_name = 'Проект'
         verbose_name_plural = 'Проекты'
+
+    def soft_delete(self):
+        self.is_deleted = True
+        self.save()
 
 
 class Status(models.Model):
