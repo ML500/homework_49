@@ -37,10 +37,6 @@ class Project(models.Model):
         verbose_name = 'Проект'
         verbose_name_plural = 'Проекты'
 
-    def soft_delete(self):
-        self.is_deleted = True
-        self.save()
-
 
 class Status(models.Model):
     name = models.CharField(max_length=100, verbose_name='Название')

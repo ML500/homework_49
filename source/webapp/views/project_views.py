@@ -1,5 +1,6 @@
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.http import Http404
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
@@ -38,7 +39,11 @@ class ProjectView(DetailView):
     paginate_orphans = 1
 
     def get_context_data(self, **kwargs):
+        self.object = self.get_object()
+        if self.object.is_deleted == True:
+            raise Http404
         context = super().get_context_data(**kwargs)
+        print(context, 'adfgd')
 
         goals, page, is_paginated = self.paginate_goals(self.object)
         context['goals'] = goals
@@ -82,7 +87,8 @@ class ProjectDeleteView(DeleteView):
     model = Project
     success_url = reverse_lazy('index')
 
-    def soft_delete(self):
-        self.is_deleted = True
-        self.deleted_at = timezone.now()
-        self.save()
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_deleted = True
+        self.object.save()
+        return (self.get_success_url())

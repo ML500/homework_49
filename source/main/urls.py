@@ -32,7 +32,6 @@ urlpatterns = [
          name='project_delete'),
     path('project/mass-action/', project_mass_action_view, name='project_mass_action'),
 
-
     path('goal/<int:pk>/', GoalView.as_view(), name='goal_view'),
     path('project/<int:pk>/goals/add', GoalCreateView.as_view(),
          name='goal_add'),

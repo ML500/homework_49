@@ -48,7 +48,7 @@ class SearchView(ListView):
         return super().get_context_data(object_list=object_list, **kwargs)
 
     def get_queryset(self):
-        data = self.model.objects.all()
+        data = self.model.objects.filter(is_deleted=False)
         form = self.search_form(data=self.request.GET)
         if form.is_valid():
             search = form.cleaned_data['search']
@@ -60,12 +60,3 @@ class SearchView(ListView):
         query = None
         return query
 
-    # def get_queryset(self):
-    #     data = self.model.objects.all()
-    #     form = self.search_form(data=self.request.GET)
-    #     if form.is_valid():
-    #         search = form.cleaned_data['search']
-    #         if search:
-    #             data = data.filter(Q(summary__icontains=search) | Q(description__icontains=search))
-    #
-    #     return data.order_by('-created_at')
