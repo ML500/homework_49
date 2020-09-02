@@ -1,4 +1,4 @@
-from django.http import HttpResponseNotFound
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
@@ -7,7 +7,7 @@ from webapp.models import Goal, Project
 from webapp.forms import GoalForm
 
 
-class GoalView(DetailView):
+class GoalView(LoginRequiredMixin, DetailView):
     template_name = 'goal/goal_view.html'
     model = Goal
 
@@ -16,7 +16,7 @@ class GoalView(DetailView):
         return context
 
 
-class GoalCreateView(CreateView):
+class GoalCreateView(LoginRequiredMixin, CreateView):
     model = Goal
     template_name = 'goal/goal_create.html'
     form_class = GoalForm
@@ -30,7 +30,7 @@ class GoalCreateView(CreateView):
         return redirect('project_view', pk=project.pk)
 
 
-class GoalUpdateView(UpdateView):
+class GoalUpdateView(LoginRequiredMixin, UpdateView):
     model = Goal
     template_name = 'goal/goal_update.html'
     form_class = GoalForm
@@ -39,7 +39,7 @@ class GoalUpdateView(UpdateView):
         return reverse('project_view', kwargs={'pk': self.object.project.pk})
 
 
-class GoalDeleteView(DeleteView):
+class GoalDeleteView(LoginRequiredMixin, DeleteView):
     model = Goal
 
     def get(self, request, *args, **kwargs):

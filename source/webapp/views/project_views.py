@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import Http404
@@ -24,6 +26,7 @@ class IndexView(SearchView):
         return query
 
 
+@login_required
 def project_mass_action_view(request):
     if request.method == 'POST':
         ids = request.POST.getlist('selected_projects', [])
@@ -32,7 +35,7 @@ def project_mass_action_view(request):
     return redirect('index')
 
 
-class ProjectView(DetailView):
+class ProjectView(LoginRequiredMixin, DetailView):
     template_name = 'project/project_view.html'
     model = Project
     paginate_goals_by = 4
@@ -63,21 +66,21 @@ class ProjectView(DetailView):
             return goals, None, False
 
 
-class ProjectCreateView(CreateView):
+class ProjectCreateView(LoginRequiredMixin, CreateView):
     template_name = 'project/project_create.html'
     form_class = ProjectForm
     model = Project
 
-    def dispatch(self, request, *args, **kwargs):
-        if self.request.user.is_authenticated:
-            return super().dispatch(request, *args, **kwargs)
-        return redirect('login')
+    # def dispatch(self, request, *args, **kwargs):
+    #     if self.request.user.is_authenticated:
+    #         return super().dispatch(request, *args, **kwargs)
+    #     return redirect('login')
 
     def get_success_url(self):
         return reverse('project_view', kwargs={'pk': self.object.pk})
 
 
-class ProjectUpdateView(UpdateView):
+class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'project/project_update.html'
     form_class = ProjectForm
     model = Project
@@ -86,7 +89,7 @@ class ProjectUpdateView(UpdateView):
         return reverse('project_view', kwargs={'pk': self.object.pk})
 
 
-class ProjectDeleteView(DeleteView):
+class ProjectDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'project/project_delete.html'
     model = Project
     success_url = reverse_lazy('index')

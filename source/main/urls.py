@@ -19,8 +19,7 @@ from django.urls import path
 from webapp.views.goal_views import GoalCreateView, GoalView, GoalUpdateView, GoalDeleteView
 from webapp.views.project_views import IndexView, ProjectView, \
     ProjectCreateView, ProjectUpdateView, ProjectDeleteView, \
-    project_mass_action_view  # , GoalCreateView, GoalUpdateView, GoalDeleteView
-# from accounts.views import login_view, logout_view
+    project_mass_action_view
 
 from django.contrib.auth.views import LoginView, LogoutView
 

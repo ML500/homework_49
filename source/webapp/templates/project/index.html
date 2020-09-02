@@ -19,7 +19,7 @@
 
     <form action="{% url "project_mass_action" %}" method="post">
         {% csrf_token %}
-    <p class="mass-actions"><input type="submit" name="delete" value="Delete selected"></p>
+        <p class="mass-actions"><input type="submit" name="delete" value="Delete selected"></p>
 
         {% for project in projects %}
             <div class="goal">
@@ -27,17 +27,19 @@
                     <h2>
                         <p>
                             <input type="checkbox" name="selected_projects"
-                            id="selected_projects-{{ project.pk }}" value="{{ project.pk }}">
+                                   id="selected_projects-{{ project.pk }}" value="{{ project.pk }}">
                             <a class="summary" href="{% url 'project_view' project.pk %}">{{ project.name }}</a>
                         </p>
                     </h2>
                     <p>Описание: {{ project.description }} </p>
                     <p>Количество задач: {{ project.goals.count }}</p>
                 </div>
-                <div class="icon-block">
-                    <p><a class="icon update" href="{% url 'project_update' project.pk %}">Update</a></p>
-                    <p><a class="icon delete" href="{% url 'project_delete' project.pk %}">Delete</a></p>
-                </div>
+                {% if request.user.is_authenticated %}
+                    <div class="icon-block">
+                        <p><a class="icon update" href="{% url 'project_update' project.pk %}">Update</a></p>
+                        <p><a class="icon delete" href="{% url 'project_delete' project.pk %}">Delete</a></p>
+                    </div>
+                {% endif %}
             </div>
         {% endfor %}
 
