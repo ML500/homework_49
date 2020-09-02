@@ -43,7 +43,6 @@ class ProjectView(DetailView):
         if self.object.is_deleted == True:
             raise Http404
         context = super().get_context_data(**kwargs)
-        print(context, 'adfgd')
 
         goals, page, is_paginated = self.paginate_goals(self.object)
         context['goals'] = goals

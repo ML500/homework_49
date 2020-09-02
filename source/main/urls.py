@@ -20,6 +20,7 @@ from webapp.views.goal_views import GoalCreateView, GoalView, GoalUpdateView, Go
 from webapp.views.project_views import IndexView, ProjectView, \
     ProjectCreateView, ProjectUpdateView, ProjectDeleteView, \
     project_mass_action_view  # , GoalCreateView, GoalUpdateView, GoalDeleteView
+from accounts.views import login_view, logout_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,5 +40,8 @@ urlpatterns = [
          name='goal_update'),
     path('project/<int:pk>/goal/delete/', GoalDeleteView.as_view(),
          name='goal_delete'),
+
+    path('accounts/login/', login_view, name='login'),
+    path('accounts/logout/', logout_view, name='logout'),
 
 ]

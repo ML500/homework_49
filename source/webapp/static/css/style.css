@@ -74,6 +74,7 @@ body {
 .form-error {
     border: solid 1px red;
     background: darkred;
+    color: white;
 }
 
 .form-error:focus {
