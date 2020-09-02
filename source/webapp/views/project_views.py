@@ -68,6 +68,11 @@ class ProjectCreateView(CreateView):
     form_class = ProjectForm
     model = Project
 
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return super().dispatch(request, *args, **kwargs)
+        return redirect('login')
+
     def get_success_url(self):
         return reverse('project_view', kwargs={'pk': self.object.pk})
 

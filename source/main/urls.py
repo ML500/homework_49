@@ -20,7 +20,9 @@ from webapp.views.goal_views import GoalCreateView, GoalView, GoalUpdateView, Go
 from webapp.views.project_views import IndexView, ProjectView, \
     ProjectCreateView, ProjectUpdateView, ProjectDeleteView, \
     project_mass_action_view  # , GoalCreateView, GoalUpdateView, GoalDeleteView
-from accounts.views import login_view, logout_view
+# from accounts.views import login_view, logout_view
+
+from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -41,7 +43,7 @@ urlpatterns = [
     path('project/<int:pk>/goal/delete/', GoalDeleteView.as_view(),
          name='goal_delete'),
 
-    path('accounts/login/', login_view, name='login'),
-    path('accounts/logout/', logout_view, name='logout'),
+    path('accounts/login/', LoginView.as_view(), name='login'),
+    path('accounts/logout/', LogoutView.as_view(), name='logout'),
 
 ]
