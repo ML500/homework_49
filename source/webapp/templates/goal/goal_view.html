@@ -3,9 +3,9 @@
 {% block title %}View{% endblock %}
 
 {% block menu %}
-    <li><a href="{% url 'goal_update' goal.pk %}">Update</a></li>
-    <li><a href="{% url 'goal_delete' goal.pk %}">Delete</a></li>
-    <li><a href="{% url 'project_view' goal.project.pk %}">Cancel</a></li>
+    <li><a href="{% url 'webapp:goal_update' goal.pk %}">Update</a></li>
+    <li><a href="{% url 'webapp:goal_delete' goal.pk %}">Delete</a></li>
+    <li><a href="{% url 'webapp:project_view' goal.project.pk %}">Cancel</a></li>
 {% endblock %}
 
 {% block content %}

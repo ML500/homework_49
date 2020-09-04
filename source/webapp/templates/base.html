@@ -11,29 +11,29 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css"
           integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE="
-          crossorigin="anonymous" />
+          crossorigin="anonymous"/>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% block links %}{% endblock %}
 </head>
 <body>
-    <nav class="navbar">
-        <div class="container">
-            <ul class="menu">
-                <li><a href="{% url 'index' %}">Main page</a></li>
-                {% if request.user.is_authenticated %}
-                    <li><a href="{% url 'project_create' %}">Create Project</a></li>
-                    {% block menu %}{% endblock %}
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                {% endif %}
-            </ul>
-            {% block search %}{% endblock %}
-        </div>
-    </nav>
+<nav class="navbar">
     <div class="container">
-        {% block content %}{% endblock %}
+        <ul class="menu">
+            <li><a href="{% url 'webapp:index' %}">Main page</a></li>
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url 'webapp:project_create' %}">Create Project</a></li>
+                {% block menu %}{% endblock %}
+                <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'accounts:login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+        {% block search %}{% endblock %}
     </div>
+</nav>
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous">

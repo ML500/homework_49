@@ -3,7 +3,7 @@
 {% block content %}
     <h1>Create Project</h1>
 
-    {% url "project_create" as action_url %}
+    {% url "webapp:project_create" as action_url %}
     {% include 'partial/form.html' with action_url=action_url form_method='post' %}
 
     

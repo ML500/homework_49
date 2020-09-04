@@ -4,7 +4,7 @@
 
 {% block search %}
     <div class="search-form">
-        <form action="{% url 'index' %}" method="GET">
+        <form action="{% url 'webapp:index' %}" method="GET">
             {{ form.search }}
             <input type="submit" value="Найти">
         </form>
@@ -17,7 +17,7 @@
         {% include 'partial/pagination.html' %}
     {% endif %}
 
-    <form action="{% url "project_mass_action" %}" method="post">
+    <form action="{% url "webapp:project_mass_action" %}" method="post">
         {% csrf_token %}
         <p class="mass-actions"><input type="submit" name="delete" value="Delete selected"></p>
 
@@ -28,7 +28,7 @@
                         <p>
                             <input type="checkbox" name="selected_projects"
                                    id="selected_projects-{{ project.pk }}" value="{{ project.pk }}">
-                            <a class="summary" href="{% url 'project_view' project.pk %}">{{ project.name }}</a>
+                            <a class="summary" href="{% url 'webapp:project_view' project.pk %}">{{ project.name }}</a>
                         </p>
                     </h2>
                     <p>Описание: {{ project.description }} </p>
@@ -36,8 +36,8 @@
                 </div>
                 {% if request.user.is_authenticated %}
                     <div class="icon-block">
-                        <p><a class="icon update" href="{% url 'project_update' project.pk %}">Update</a></p>
-                        <p><a class="icon delete" href="{% url 'project_delete' project.pk %}">Delete</a></p>
+                        <p><a class="icon update" href="{% url 'webapp:project_update' project.pk %}">Update</a></p>
+                        <p><a class="icon delete" href="{% url 'webapp:project_delete' project.pk %}">Delete</a></p>
                     </div>
                 {% endif %}
             </div>
