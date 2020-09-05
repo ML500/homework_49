@@ -8,6 +8,6 @@
     <form action="{% url "webapp:goal_delete" goal.pk %}" method="post">
         {% csrf_token %}
         <p><input type="submit" value="Confirm"></p>
-        <p><a href="{% url 'webapp:index' %}">Cancel</a></p>
+        <p><a href="{% url 'index' %}">Cancel</a></p>
     </form>
 {% endblock %}
