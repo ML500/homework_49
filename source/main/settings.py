@@ -24,7 +24,7 @@ SECRET_KEY = '1+k^ld7#*$$@u4-tq42zv8)k0x1y*soa#kpygpa-1dfk@(9b*3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'webapp',
     'accounts',
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

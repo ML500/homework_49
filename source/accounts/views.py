@@ -1,6 +1,6 @@
 from django.contrib.auth import login
 from django.contrib.auth.models import User
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.urls import reverse
 
 from accounts.forms import MyUserCreationForm

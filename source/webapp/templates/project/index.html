@@ -2,14 +2,18 @@
 
 {% block title %}Main{% endblock %}
 
-{% block search %}
-    <div class="search-form">
-        <form action="{% url 'webapp:index' %}" method="GET">
-            {{ form.search }}
-            <input type="submit" value="Найти">
-        </form>
-    </div>
-{% endblock %}
+{#{% block search %}#}
+{#    <div class="search-form">#}
+{#     <form class="form-inline my-2 my-lg-0" action="{% url 'webapp:index' %}" method="GET">#}
+{#         {{ form.search }}#}
+{#         <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>#}
+{#    </form>#}
+{#        <form action="{% url 'webapp:index' %}" method="GET">#}
+{#            {{ form.search }}#}
+{#            <input type="submit" value="Найти">#}
+{#        </form>#}
+{#    </div>#}
+{#{% endblock %}#}
 
 {% block content %}
     <h1 class="headline">Projects</h1>

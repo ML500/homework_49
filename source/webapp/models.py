@@ -1,12 +1,10 @@
 from django.db import models
-from django.core.validators import MaxLengthValidator
 
 
 class Goal(models.Model):
     project = models.ForeignKey('webapp.Project', related_name='goals',
                                 on_delete=models.CASCADE, verbose_name='Проект', default=1)
     summary = models.CharField(max_length=200, verbose_name='Заголовок')
-    # validators=[MaxLengthValidator(20)])
     description = models.TextField(max_length=3000, null=True, blank=True, verbose_name='Описание')
     status = models.ForeignKey('webapp.Status', related_name='statuses',
                                on_delete=models.PROTECT, verbose_name='Статус', default=1)

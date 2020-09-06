@@ -15,9 +15,9 @@ class MyUserCreationForm(UserCreationForm):
         first_name = self.cleaned_data['first_name']
         last_name = self.cleaned_data['last_name']
         email = self.cleaned_data['email']
-        if len(first_name) == 0 and len(last_name) == 0:
+        if not first_name and not last_name:
             raise ValidationError('At least one of the name fields must be fill')
-        elif len(email) == 0:
+        elif not email:
             raise ValidationError('Email field must be fill')
         else:
             return cleaned_data
