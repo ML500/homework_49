@@ -27,7 +27,7 @@ class GoalCreateView(LoginRequiredMixin, CreateView):
         goal.project = project
         goal.save()
         form.save_m2m()
-        return redirect('project_view', pk=project.pk)
+        return redirect('webapp:project_view', pk=project.pk)
 
 
 class GoalUpdateView(LoginRequiredMixin, UpdateView):
@@ -36,14 +36,15 @@ class GoalUpdateView(LoginRequiredMixin, UpdateView):
     form_class = GoalForm
 
     def get_success_url(self):
-        return reverse('project_view', kwargs={'pk': self.object.project.pk})
+        return reverse('webapp:project_view', kwargs={'pk': self.object.project.pk})
 
 
 class GoalDeleteView(LoginRequiredMixin, DeleteView):
     model = Goal
+    template_name = 'goal/goal_delete.html'
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('project_view', kwargs={'pk': self.object.project.pk})
+        return reverse('webapp:project_view', kwargs={'pk': self.object.project.pk})

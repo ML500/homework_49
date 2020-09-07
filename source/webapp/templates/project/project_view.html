@@ -3,10 +3,10 @@
 {% block title %}View{% endblock %}
 
 {% block menu %}
-    <li><a href="{% url 'webapp:project_update' project.pk %}">Update Project</a></li>
-    <li><a href="{% url 'webapp:project_delete' project.pk %}">Delete Project</a></li>
-    <li><a href="{% url 'webapp:goal_add' project.pk %}">Add Goal</a></li>
-    <li><a href="{% url 'webapp:index' %}">Cancel</a></li>
+    <li><a class="nav-link" href="{% url 'webapp:project_update' project.pk %}">Update Project</a></li>
+    <li><a class="nav-link" href="{% url 'webapp:project_delete' project.pk %}">Delete Project</a></li>
+    <li><a class="nav-link" href="{% url 'webapp:goal_add' project.pk %}">Add Goal</a></li>
+    <li><a class="nav-link" href="{% url 'webapp:index' %}">Cancel</a></li>
 {% endblock %}
 
 {% block content %}

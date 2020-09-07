@@ -13,23 +13,64 @@
     {% block links %}{% endblock %}
 </head>
 <body>
-<nav class="navbar">
-    <div class="container">
-        <ul class="menu">
-            <li><a href="{% url 'webapp:index' %}">Main page</a></li>
-            {% if request.user.is_authenticated %}
-                <li><a href="{% url 'webapp:project_create' %}">Create Project</a></li>
+<header>
+    <nav class="navbar navbar-expand-xl navbar-light bg-light">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url "webapp:index" %}">Main page</a></li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'webapp:project_create' %}">Create Project</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Hi, {{ request.user.get_full_name }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}?next={{ request.get_full_path }}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:create' %}?next={{ request.get_full_path }}">Sign Up</a></li>
+                    {% endif %}
                 {% block menu %}{% endblock %}
-                <li><a href="#">привет, {{ request.user.get_full_name }}</a></li>
-                <li><a href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">Logout</a></li>
-            {% else %}
-                <li><a href="{% url 'accounts:login' %}?next={{ request.get_full_path }}">Login</a></li>
-                <li><a href="{% url 'accounts:create' %}?next={{ request.get_full_path }}">Sign Up</a></li>
-            {% endif %}
-        </ul>
-        {% block search %}{% endblock %}
-    </div>
-</nav>
+                </ul>
+                {% block search %}
+                    {% if search_form %}
+                        <form class="form-inline my-2 my-lg-0" action="#" method="GET">
+                            {{ search_form.search|add_class:"form-control mr-sm-2" }}
+                            <button class="btn btn-light my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    {% endif %}
+                {% endblock %}
+            </div>
+        </div>
+    </nav>
+</header>
+{#<nav class="navbar">#}
+{#    <div class="container">#}
+{#        <ul class="menu">#}
+{#            <li><a href="{% url 'webapp:index' %}">Main page</a></li>#}
+{#            {% if request.user.is_authenticated %}#}
+{#                <li><a href="{% url 'webapp:project_create' %}">Create Project</a></li>#}
+{#                {% block menu %}{% endblock %}#}
+{#                <li><a href="#">привет, {{ request.user.get_full_name }}</a></li>#}
+{#                <li><a href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">Logout</a></li>#}
+{#            {% else %}#}
+{#                <li><a href="{% url 'accounts:login' %}?next={{ request.get_full_path }}">Login</a></li>#}
+{#                <li><a href="{% url 'accounts:create' %}?next={{ request.get_full_path }}">Sign Up</a></li>#}
+{#            {% endif %}#}
+{#        </ul>#}
+{#        {% block search %}#}
+{#                {% if search_form %}#}
+{#                    <form class="form-inline my-2 my-lg-0" action="#" method="GET">#}
+{#                        {{ search_form.search|add_class:"form-control mr-sm-2" }}#}
+{#                        <button class="btn btn-light my-2 my-sm-0"#}
+{#                                type="submit">Найти</button>#}
+{#                    </form>#}
+{#                {% endif %}#}
+{#        {% endblock %}#}
+{#    </div>#}
+{#</nav>#}
 <div class="container">
     {% block content %}{% endblock %}
 </div>

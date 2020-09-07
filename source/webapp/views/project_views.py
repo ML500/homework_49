@@ -32,7 +32,7 @@ def project_mass_action_view(request):
         ids = request.POST.getlist('selected_projects', [])
         if 'delete' in request.POST:
             Project.objects.filter(id__in=ids).delete()
-    return redirect('index')
+    return redirect('webapp:index')
 
 
 class ProjectView(LoginRequiredMixin, DetailView):
@@ -77,7 +77,7 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
     #     return redirect('login')
 
     def get_success_url(self):
-        return reverse('project_view', kwargs={'pk': self.object.pk})
+        return reverse('webapp:project_view', kwargs={'pk': self.object.pk})
 
 
 class ProjectUpdateView(LoginRequiredMixin, UpdateView):
@@ -86,16 +86,16 @@ class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     model = Project
 
     def get_success_url(self):
-        return reverse('project_view', kwargs={'pk': self.object.pk})
+        return reverse('webapp:project_view', kwargs={'pk': self.object.pk})
 
 
 class ProjectDeleteView(LoginRequiredMixin, DeleteView):
-    template_name = 'project/project_delete.html'
     model = Project
-    success_url = reverse_lazy('index')
-
-    def delete(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        self.object.is_deleted = True
-        self.object.save()
-        return (self.get_success_url())
+    template_name = 'project/project_delete.html'
+    success_url = reverse_lazy('webapp:index')
+    #
+    # def delete(self, request, *args, **kwargs):
+    #     self.object = self.get_object()
+    #     self.object.is_deleted = True
+    #     self.object.save()
+    #     return (self.get_success_url())
