@@ -18,16 +18,32 @@ class GoalView(LoginRequiredMixin, DetailView):
 
 class GoalCreateView(LoginRequiredMixin, CreateView):
     model = Goal
-    template_name = 'goal/goal_create.html'
     form_class = GoalForm
+    template_name = 'goal/goal_create.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        kwargs['project'] = self.project
+        return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
-        project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
-        goal = form.save(commit=False)
-        goal.project = project
-        goal.save()
-        form.save_m2m()
-        return redirect('webapp:project_view', pk=project.pk)
+        form.instance.project = self.project
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('webapp:project_view', kwargs={'pk': self.object.project.pk})
+
+
+    # def form_valid(self, form):
+    #     project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
+    #     goal = form.save(commit=False)
+    #     goal.project = project
+    #     goal.save()
+    #     form.save_m2m()
+    #     return redirect('webapp:project_view', pk=project.pk)
 
 
 class GoalUpdateView(LoginRequiredMixin, UpdateView):

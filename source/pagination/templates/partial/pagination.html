@@ -1,0 +1,89 @@
+{% load page_utils %}
+
+<nav class="my-3">
+    {% if pages_display.nav or pages_display.form %}
+        <ul class="pagination justify-content-center align-items-center flex-wrap my-3">
+            {% if pages_display.nav %}
+                <li class="page-item">
+                    <a class="page-link" href="?{{ request|page_query_string:1 }}">&laquo; В начало</a>
+                </li>
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?{{ request|page_query_string:page_obj.previous_page_number }}"
+                           aria-label="Назад">
+                            <span aria-hidden="true">&lsaquo; Назад</span>
+                            <span class="sr-only">Назад</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">&lsaquo; Назад</span></li>
+                {% endif %}
+            {% endif %}
+            {% if pages_display.form %}
+                <li class="page-item d-none d-md-inline-block">
+                    <form class="form-inline page-link page-form" method="get">
+                        <label for="page">
+                            Страница <input class="form-control mx-2 text-center h-auto py-0 px-2 page-input"
+                                            type="text" name="page" id="page" value="{{ page_obj.number }}">
+                            из {{ paginator.num_pages }}.
+                        </label>
+                        {% for key, value in request.GET.items %}
+                            {% if not key == 'page' %}
+                                <input type="hidden" name="{{ key }}" value="{{ value }}">
+                            {% endif %}
+                        {% endfor %}
+                    </form>
+                </li>
+            {% endif %}
+            {% if pages_display.nav %}
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?{{ request|page_query_string:page_obj.next_page_number }}"
+                           aria-label="Далее">
+                            <span aria-hidden="true">Далее &rsaquo;</span>
+                            <span class="sr-only">Далее</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">Далее &rsaquo;</span></li>
+                {% endif %}
+                <li class="page-item">
+                    <a class="page-link" href="?{{ request|page_query_string:paginator.num_pages }}">В конец &raquo;</a>
+                </li>
+            {% endif %}
+        </ul>
+    {% endif %}
+
+    {% if pages_display.form %}
+        <ul class="pagination justify-content-center flex-wrap my-3 d-flex d-md-none">
+            <li class="page-item">
+                <form class="form-inline page-link page-form" method="get">
+                    <label for="page" class="d-flex align-items-center mb-0">
+                        Страница <input class="form-control mx-2 text-center h-auto py-0 px-2 page-input"
+                                        type="text" name="page" id="page" value="{{ page_obj.number }}">
+                        из {{ paginator.num_pages }}.
+                    </label>
+                    {% for key, value in request.GET.items %}
+                        {% if not key == 'page' %}
+                            <input type="hidden" name="{{ key }}" value="{{ value }}">
+                        {% endif %}
+                    {% endfor %}
+                </form>
+            </li>
+        </ul>
+    {% endif %}
+
+    {% if pages_display.list %}
+        <ul class="pagination justify-content-center my-3 flex-wrap">
+            {% for page_number in paginator.page_range %}
+                {% if page_obj|display_page:page_number %}
+                    <li class="page-item {% if page_number == page_obj.number %}active{% endif %}">
+                        <a class="page-link" href="?{{ request|page_query_string:page_number }}">{{ page_number }}</a>
+                    </li>
+                {% elif page_obj.show_prev %}
+                    <li class="page-item disabled"><span class="page-link">&hellip;</span></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+</nav>

@@ -25,14 +25,18 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a class="nav-link" href="{% url "webapp:index" %}">Main page</a></li>
                     {% if request.user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'webapp:project_create' %}">Create Project</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Hi, {{ request.user.get_full_name }}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">Logout</a></li>
-                    {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}?next={{ request.get_full_path }}">Login</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:create' %}?next={{ request.get_full_path }}">Sign Up</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url "webapp:project_create" %}">Create project</a></li>
+                        {% block menu %}{% endblock %}
                     {% endif %}
-                {% block menu %}{% endblock %}
+                    {% block auth_menu %}
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link" href="#">Hi, {{ request.user.get_full_name|default:request.user.username }}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">Logout</a></li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}?next={{ request.get_full_path }}">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:create' %}?next={{ request.get_full_path }}">Sign Up</a></li>
+                        {% endif %}
+                    {% endblock %}
                 </ul>
                 {% block search %}
                     {% if search_form %}

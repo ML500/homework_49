@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
 
 class Goal(models.Model):
@@ -22,6 +23,8 @@ class Goal(models.Model):
 
 
 class Project(models.Model):
+    user = models.ManyToManyField(get_user_model(), related_name='projects',
+                                  blank=True, verbose_name='Пользователи')
     start_date = models.DateField(verbose_name='Дата начала')
     end_date = models.DateField(null=True, blank=True, verbose_name='Дата окончания')
     name = models.CharField(max_length=200, verbose_name='Название')
