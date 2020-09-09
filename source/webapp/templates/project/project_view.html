@@ -3,9 +3,18 @@
 {% block title %}View{% endblock %}
 
 {% block menu %}
-    <li><a class="nav-link" href="{% url 'webapp:project_update' project.pk %}">Update Project</a></li>
-    <li><a class="nav-link" href="{% url 'webapp:project_delete' project.pk %}">Delete Project</a></li>
-    <li><a class="nav-link" href="{% url 'webapp:goal_add' project.pk %}">Add Goal</a></li>
+    {% if perms.webapp.change_project %}
+        <li><a class="nav-link" href="{% url 'webapp:project_update' project.pk %}">Update Project</a></li>
+    {% endif %}
+    {% if perms.webapp.delete_project %}
+        <li><a class="nav-link" href="{% url 'webapp:project_delete' project.pk %}">Delete Project</a></li>
+    {% endif %}
+    {% if perms.webapp.add_goal and request.user in project.user.all %}
+        <li><a class="nav-link" href="{% url 'webapp:goal_add' project.pk %}">Add Goal</a></li>
+    {% endif %}
+    {% if perms.auth.add_user and request.user in project.user.all %}
+        <li><a class="nav-link" href="{% url 'webapp:add_user' project.pk %}">Add User</a></li>
+    {% endif %}
     <li><a class="nav-link" href="{% url 'webapp:index' %}">Cancel</a></li>
 {% endblock %}
 
@@ -24,15 +33,25 @@
                 <h4 class="summary"><a href="{% url 'webapp:goal_view' goal.pk %}">{{ goal.summary }}</a></h4>
                 <p>Description: {{ goal.description }}</p>
             </div>
-                    <div class="goals-but">
-                        <p><a href="{% url 'webapp:goal_update' goal.pk %}">Update</a></p>
-                        <p><a href="{% url 'webapp:goal_delete' goal.pk %}">Delete</a></p>
-                    </div>
+            <div class="goals-but">
+                {% if perms.webapp.change_goal and request.user in goal.project.user.all  %}
+                    <p><a href="{% url 'webapp:goal_update' goal.pk %}">Update</a></p>
+                {% endif %}
+                {% if perms.webapp.delete_goal and request.user in goal.project.user.all %}
+                    <p><a href="{% url 'webapp:goal_delete' goal.pk %}">Delete</a></p>
+                {% endif %}
+            </div>
         </div>
         <hr>
         {% empty %}
             <p>No goals</p>
         {% endfor %}
+         <h4 class="headline">User</h4>
+         {% for user in project.user.all %}
+             <li>{{user}}</li>
+         {% empty %}
+            <p>No users</p>
+         {% endfor %}
 {% if is_paginated %}
     {% include 'partial/pagination.html' %}
 {% endif %}

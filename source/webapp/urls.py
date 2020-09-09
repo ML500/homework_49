@@ -2,7 +2,7 @@ from django.urls import path, include
 from webapp.views.goal_views import GoalCreateView, GoalView, GoalUpdateView, GoalDeleteView
 from webapp.views.project_views import IndexView, ProjectView, \
     ProjectCreateView, ProjectUpdateView, ProjectDeleteView, \
-    project_mass_action_view
+    project_mass_action_view, UserAddView
 
 app_name = 'webapp'
 
@@ -18,6 +18,8 @@ urlpatterns = [
         path('mass-action/', project_mass_action_view, name='project_mass_action'),
         path('<int:pk>/goals/add', GoalCreateView.as_view(),
              name='goal_add'),
+        path('<int:pk>/user/add', UserAddView.as_view(),
+             name='add_user'),
     ])),
 
     path('goal/<int:pk>/', GoalView.as_view(), name='goal_view'),

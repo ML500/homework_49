@@ -23,13 +23,17 @@
 
     <form action="{% url "webapp:project_mass_action" %}" method="post">
         {% csrf_token %}
-        <p class="mass-actions"><input type="submit" name="delete" value="Delete selected"></p>
+        {% if perms.webapp.delete_project %}
+            <p class="mass-actions"><input type="submit" name="delete" value="Delete selected"></p>
+        {% endif %}
         {% for project in projects %}
             <div class="projects">
                 <div class="text-block">
                     <h2>
+                        {% if perms.webapp.delete_project %}
                         <input type="checkbox" name="selected_projects"
                                id="selected_projects-{{ project.pk }}" value="{{ project.pk }}">
+                        {% endif %}
                         <a class="summary" href="{% url 'webapp:project_view' project.pk %}">{{ project.name }}</a>
                     </h2>
                     <p>Описание: {{ project.description }} </p>
@@ -37,8 +41,12 @@
                 </div>
                 {% if request.user.is_authenticated %}
                     <div class="icon-block">
-                        <p><a class="icon update" href="{% url 'webapp:project_update' project.pk %}">Update</a></p>
-                        <p><a class="icon delete" href="{% url 'webapp:project_delete' project.pk %}">Delete</a></p>
+                        {% if perms.webapp.change_project %}
+                            <p><a class="icon update" href="{% url 'webapp:project_update' project.pk %}">Update</a></p>
+                        {% endif %}
+                        {% if perms.webapp.delete_project %}
+                            <p><a class="icon delete" href="{% url 'webapp:project_delete' project.pk %}">Delete</a></p>
+                        {% endif %}
                     </div>
                 {% endif %}
             </div>

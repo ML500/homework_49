@@ -25,3 +25,10 @@ class ProjectForm(forms.ModelForm):
         fields = ['name', 'description', 'start_date', 'end_date']
         widgets = {'start_date': FengyuanChenDatePickerInput,
                    'end_date': FengyuanChenDatePickerInput}
+
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ['user']
+        widgets = {'user': forms.CheckboxSelectMultiple}
