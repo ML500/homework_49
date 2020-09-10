@@ -10,7 +10,7 @@ from webapp.views.base_views import SearchView
 from django.contrib.auth import get_user_model
 
 
-class IndexView(SearchView):
+class IndexView(LoginRequiredMixin, SearchView):
     template_name = 'project/index.html'
     context_object_name = 'projects'
     model = Project

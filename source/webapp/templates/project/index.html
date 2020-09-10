@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 
 {% block title %}Main{% endblock %}
@@ -14,7 +15,6 @@
 {#        </form>#}
 {#    </div>#}
 {#{% endblock %}#}
-
 {% block content %}
     <h1 class="headline">Projects</h1>
     {% if is_paginated %}
@@ -58,3 +58,4 @@
         {% include 'partial/pagination.html' %}
     {% endif %}
 {% endblock %}
+
