@@ -1,10 +1,11 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.urls import reverse
 
 from accounts.forms import MyUserCreationForm
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 
 
 class RegisterView(CreateView):
@@ -26,6 +27,8 @@ class RegisterView(CreateView):
         return next_url
 
     # def register_view(request, *args, **kwargs):
+
+
 #     if request.method == 'POST':
 #         form = MyUserCreationForm(data=request.POST)
 #         if form.is_valid():
@@ -35,3 +38,11 @@ class RegisterView(CreateView):
 #     else:
 #         form = MyUserCreationForm()
 #     return render(request, 'user_create.html', context={'form': form})
+
+
+class UserDetailView(LoginRequiredMixin, DetailView):
+    model = get_user_model()
+    template_name = 'user_detail.html'
+    context_object_name = 'user_obj'
+    # paginate_related_by = 5
+    # paginate_related_orphans = 0
