@@ -125,3 +125,6 @@ LOGIN_REDIRECT_URL = 'webapp:index'
 LOGOUT_REDIRECT_URL = 'webapp:index'
 
 LOGIN_URL = 'accounts:login'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL = '/media/'
