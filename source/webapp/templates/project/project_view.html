@@ -54,7 +54,7 @@
 
          <h4 class="headline">User</h4>
          {% for user in project.user.all %}
-             <li>{{user}}</li>
+             <li><a href="{% url 'accounts:detail' user.pk %}">{{user}}</a></li>
          {% empty %}
             <p>No users</p>
          {% endfor %}

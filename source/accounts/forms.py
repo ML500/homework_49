@@ -1,6 +1,8 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django.core.exceptions import ValidationError
+
+from accounts.models import Profile
 
 
 class MyUserCreationForm(UserCreationForm):
@@ -21,3 +23,8 @@ class MyUserCreationForm(UserCreationForm):
             raise ValidationError('Email field must be fill')
         else:
             return cleaned_data
+
+    def save(self, commit=True):
+        user = super().save(commit=commit)
+        Profile.objects.create(user=user)
+        return user

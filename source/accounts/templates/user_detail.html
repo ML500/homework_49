@@ -16,5 +16,5 @@
     <p>Адресс github: {{ user_obj.profile.github_link }}</p>
     <p>О себе: {{ user_obj.profile.about_me }}</p>
     <h2 class="text-center clear">Проекты пользователя:</h2>
-{#    {% include 'partial/article_list.html' %}#}
+    {% include 'partial/project_list.html' with projects=user_obj.projects.all %}
 {% endblock %}

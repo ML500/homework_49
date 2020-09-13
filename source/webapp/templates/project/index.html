@@ -17,45 +17,6 @@
 {#{% endblock %}#}
 {% block content %}
     <h1 class="headline">Projects</h1>
-    {% if is_paginated %}
-        {% include 'partial/pagination.html' %}
-    {% endif %}
-
-    <form action="{% url "webapp:project_mass_action" %}" method="post">
-        {% csrf_token %}
-        {% if perms.webapp.delete_project %}
-            <p class="mass-actions"><input type="submit" name="delete" value="Delete selected"></p>
-        {% endif %}
-        {% for project in projects %}
-            <div class="projects">
-                <div class="text-block">
-                    <h2>
-                        {% if perms.webapp.delete_project %}
-                        <input type="checkbox" name="selected_projects"
-                               id="selected_projects-{{ project.pk }}" value="{{ project.pk }}">
-                        {% endif %}
-                        <a class="summary" href="{% url 'webapp:project_view' project.pk %}">{{ project.name }}</a>
-                    </h2>
-                    <p>Описание: {{ project.description }} </p>
-                    <p>Количество задач: {{ project.goals.count }}</p>
-                </div>
-                {% if request.user.is_authenticated %}
-                    <div class="icon-block">
-                        {% if perms.webapp.change_project %}
-                            <p><a class="icon update" href="{% url 'webapp:project_update' project.pk %}">Update</a></p>
-                        {% endif %}
-                        {% if perms.webapp.delete_project %}
-                            <p><a class="icon delete" href="{% url 'webapp:project_delete' project.pk %}">Delete</a></p>
-                        {% endif %}
-                    </div>
-                {% endif %}
-            </div>
-        {% endfor %}
-
-    </form>
-
-    {% if is_paginated %}
-        {% include 'partial/pagination.html' %}
-    {% endif %}
+    {% include 'partial/project_list.html' %}
 {% endblock %}
 
