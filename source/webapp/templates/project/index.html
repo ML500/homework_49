@@ -16,7 +16,23 @@
 {#    </div>#}
 {#{% endblock %}#}
 {% block content %}
+
     <h1 class="headline">Projects</h1>
-    {% include 'partial/project_list.html'%}
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
+
+    <form action="{% url "webapp:project_mass_action" %}" method="post">
+        {% csrf_token %}
+        {% if perms.webapp.delete_project %}
+            <p class="mass-actions"><input type="submit" name="delete" value="Delete selected"></p>
+        {% endif %}
+        {% include 'partial/project_list.html'%}
+    </form>
+
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
+
 {% endblock %}
 
