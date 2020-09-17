@@ -3,11 +3,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.db.models import Q
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
-from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, ListView
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 
-from accounts.admin import User
 from webapp.models import Project
-from webapp.forms import SimpleSearchForm, ProjectForm, GoalForm, UserForm
+from webapp.forms import SimpleSearchForm, ProjectForm, UserForm
 from webapp.views.base_views import SearchView
 from django.contrib.auth import get_user_model
 
@@ -92,8 +91,3 @@ class UserAddView(PermissionRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('webapp:project_view', kwargs={'pk': self.object.pk})
-
-
-
-
-
