@@ -332,5 +332,85 @@
   "fields": {
     "name": "\u0443\u043b\u0443\u0447\u0448\u0435\u043d\u0438\u0435"
   }
+},
+{
+  "model": "accounts.profile",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "github_link": "Test",
+    "about_me": "Test Test",
+    "avatar": "user_pics/Arnold_Schwarzenegger.jpg"
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 2,
+  "fields": {
+    "user": 29,
+    "github_link": null,
+    "about_me": "",
+    "avatar": "user_pics/James_Cameron.jpg"
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 3,
+  "fields": {
+    "user": 27,
+    "github_link": "asd",
+    "about_me": "dhdfg",
+    "avatar": "user_pics/Terminator.jpg"
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 4,
+  "fields": {
+    "user": 28,
+    "github_link": null,
+    "about_me": null,
+    "avatar": ""
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 5,
+  "fields": {
+    "user": 30,
+    "github_link": null,
+    "about_me": null,
+    "avatar": ""
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 6,
+  "fields": {
+    "user": 31,
+    "github_link": null,
+    "about_me": null,
+    "avatar": ""
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 7,
+  "fields": {
+    "user": 32,
+    "github_link": null,
+    "about_me": null,
+    "avatar": ""
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 8,
+  "fields": {
+    "user": 33,
+    "github_link": null,
+    "about_me": null,
+    "avatar": ""
+  }
 }
 ]
